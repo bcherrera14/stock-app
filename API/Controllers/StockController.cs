@@ -24,7 +24,7 @@ namespace API.Controllers
                 string stockString = await response.Content.ReadAsStringAsync();
                 var result = stockString.Trim('[').Trim(']');
                 return JsonConvert.DeserializeObject<StockResponse>(result);
-                //Console.WriteLine(stockString);
+                Console.WriteLine(stockString);
                 
             }
     }
