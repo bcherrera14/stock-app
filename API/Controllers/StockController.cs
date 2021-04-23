@@ -18,12 +18,11 @@ namespace API.Controllers
         static readonly HttpClient client = new HttpClient();
 
         [HttpGet("api/stocks/search")]
-        public async Task<string> GetStock()
+        public async Task<List<StockResponse>> GetStock()
             {
                 HttpResponseMessage response = await client.GetAsync("https://sandbox.iexapis.com/stable/tops?token=Tpk_d666d25d0bdf4d1b9653dc40e7f6657f&symbols=aapl");
                 string stockString = await response.Content.ReadAsStringAsync();
-                return stockString;
-                // return JsonConvert.DeserializeObject<StockResponse>(stockString);
+                return JsonConvert.DeserializeObject<List<StockResponse>>(stockString);
                 // var result = stockString.Trim('[').Trim(']');
                 // return JsonConvert.DeserializeObject<StockResponse>(result);
                 //Console.WriteLine(stockString);
