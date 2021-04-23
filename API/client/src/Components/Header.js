@@ -6,8 +6,10 @@ const Header = () => {
 	return (
 		<Navbar expand="lg" className="fixed-top navbar-dark navbar-purple">
 			<div className="container">
-				<Link className="navbar-brand navbar-text" to="/">
-					WALL ST. BETTOR
+				<Link className="d-flex align-items-center navbar-brand navbar-text" to="/">
+					{/* <i class="fas fa-rocket" /> */}
+					<i className="rocket-launch" />
+					<span className="pl-2">Stockfolio</span>
 				</Link>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
