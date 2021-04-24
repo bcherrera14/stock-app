@@ -41,3 +41,14 @@ C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\A
 C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\client\package-lock.json
 C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\client\package.json
 C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\package-lock.json
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Humanizer.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Bryan Herrera\OneDrive\Mastermind Program\projects\capstone\stock-app\API\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll

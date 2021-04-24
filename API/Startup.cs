@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using API.Models;
 
 namespace API
 {
@@ -31,6 +34,9 @@ namespace API
             services.AddSpaStaticFiles(config => {
                 config.RootPath = "client/build";
             });
+            //added for db connection
+            services.AddDbContext<UserContext>(options => options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             // services.AddSwaggerGen(c =>
             // {
             //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -48,6 +54,8 @@ namespace API
             }
 
             app.UseHttpsRedirection();
+
+            // app.UseMvc();
 
             app.UseRouting();
 
