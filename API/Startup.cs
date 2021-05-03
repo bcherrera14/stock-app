@@ -12,8 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.EntityFrameworkCore;
 using API.Models;
+using NHibernate.NetCore;
 
 namespace API
 {
@@ -29,18 +29,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-            services.AddSpaStaticFiles(config => {
-                config.RootPath = "client/build";
-            });
-            //added for db connection
-            services.AddDbContext<UserContext>(options => options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var cfg = new NHibernate.Cfg.Configuration().Configure();
+            // var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hibernate.cfg.xml");
+            services.AddHibernate(cfg);
             // services.AddSwaggerGen(c =>
             // {
             //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             // });
+            services.AddControllers();
+            services.AddSpaStaticFiles(config => {
+                config.RootPath = "client/build";
+            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

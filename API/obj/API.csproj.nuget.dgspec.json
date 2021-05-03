@@ -14,11 +14,15 @@
         "outputPath": "C:\\Users\\Bryan Herrera\\OneDrive\\Mastermind Program\\projects\\capstone\\stock-app\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+        },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
@@ -47,15 +51,13 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.5, )"
-            },
             "NHibernate": {
               "target": "Package",
               "version": "[5.3.8, )"
+            },
+            "NHibernate.NetCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -64,14 +66,6 @@
             "Npgsql": {
               "target": "Package",
               "version": "[5.0.4, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[5.0.0, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
-              "target": "Package",
-              "version": "[1.1.0, )"
             }
           },
           "imports": [
@@ -106,11 +100,15 @@
         "outputPath": "C:\\Users\\Bryan Herrera\\OneDrive\\Mastermind Program\\projects\\capstone\\stock-app\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+        },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
@@ -155,11 +153,15 @@
         "outputPath": "C:\\Users\\Bryan Herrera\\OneDrive\\Mastermind Program\\projects\\capstone\\stock-app\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+        },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
