@@ -20,11 +20,15 @@
       "outputPath": "C:\\Users\\Bryan Herrera\\OneDrive\\Mastermind Program\\projects\\capstone\\stock-app\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Bryan Herrera\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+      },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
