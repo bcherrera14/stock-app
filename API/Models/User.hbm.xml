@@ -4,11 +4,14 @@
    assembly = "API" namespace = "API.Models">
 
    <class name = "User" table="users">
-	   <id name = "id" column="id" type="int"></id>
-      <property name = "firstName" column="firstName" type="string"/> 
-      <property name = "lastName" column="lastName" type="string"/>
+	   <id name = "id" column="id" type="string">
+         <generator class = "uuid.hex"/>
+      </id>
+      <property name = "firstname" column="firstname" type="string"/> 
+      <property name = "lastname" column="lastname" type="string"/>
       <property name = "username" column="username" type="string"/> 
-      <property name = "password" column="password" type="string"/>  
+      <property name = "password" column="password" type="string"/>
+      <property name = "accountbalance" column="accountbalance" type="int"/>  
    </class> 
    
 </hibernate-mapping>

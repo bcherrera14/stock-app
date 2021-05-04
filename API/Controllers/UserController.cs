@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NHibernate;
+using API.Models;
 
 namespace API.Controllers
 {
@@ -21,9 +22,29 @@ namespace API.Controllers
         [HttpGet("api/users")]
         public ActionResult GetUsers()
         {
-            
             return Ok("Users!");
             
+        }
+
+        //Create User
+        [HttpPost("api/users")]
+        public  ActionResult PostUser(string firstname, string lastname, string username, string password)
+        {
+            using (var session = _sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    var newUser = new User();
+                    newUser.firstname = firstname;
+                    newUser.lastname = lastname;
+                    newUser.username = username;
+                    newUser.password = password;
+                    newUser.accountbalance = 100000;
+                    session.Save(newUser);
+                    transaction.Commit();
+                }
+            }
+            return Ok(string.Format("Created New User {0} {1}", firstname, lastname));
         }
     }
 }
