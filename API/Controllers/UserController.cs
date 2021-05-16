@@ -20,9 +20,14 @@ namespace API.Controllers
 
         //Get All Users
         [HttpGet("api/users")]
-        public ActionResult GetUsers()
+        public ActionResult<IEnumerable<User>> GetUsers()
         {
-            return Ok("Users!");
+            // return Ok("Users!");
+            using (var session = _sessionFactory.OpenSession())
+            {
+                var query = session.Query<User>();
+                return query.ToList();
+            }
             
         }
 
