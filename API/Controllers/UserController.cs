@@ -31,6 +31,29 @@ namespace API.Controllers
             
         }
 
+        //Get User by ID
+        [HttpGet("api/user/id")]
+        public ActionResult GetUser()
+        {
+            using (var session = _sessionFactory.OpenSession()) {
+                using (var tx = session.BeginTransaction()) { 
+                    var students = session.CreateCriteria<User>().List<User>(); 
+                    
+                    foreach (var student in students) { 
+                        Console.WriteLine("{0} \t{1} \t{2}", student.id, 
+                            student.firstname, student.lastname); 
+                    }
+                    
+                    var stdnt = session.Get<User>("1c74b96a066e48aa820da3d66ecc9d1a"); 
+                    Console.WriteLine("Retrieved by ID"); 
+                    Console.WriteLine("{0} \t{1} \t{2}", stdnt.id, 
+                        stdnt.firstname, stdnt.lastname); 
+                    tx.Commit();
+                } 
+            }
+            return Ok("Found User");
+        }
+
         //Create User
         [HttpPost("api/users")]
         public  ActionResult PostUser(string firstname, string lastname, string username, string password)

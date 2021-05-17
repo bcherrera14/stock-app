@@ -1,18 +1,57 @@
 import React from 'react';
 import SignUpModal from './SignUpModal';
+import axios from 'axios';
 
 class LandingPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			modalShow: false
+			modalShow: false,
+			user: {},
+			username: '',
+			password: ''
 		};
 		this.setModalShow = this.setModalShow.bind(this);
+		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
+
 	setModalShow(bool) {
 		this.setState({
 			modalShow: bool
 		});
+	}
+
+	onFormSubmit(e) {
+		e.preventDefault();
+		const username = e.target.username.value;
+		const password = e.target.password.value;
+		if (username && password !== null) {
+			this.setState({
+				username,
+				password
+			});
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.username !== this.state.username) {
+			console.log(this.state.username);
+			let config = {
+				params: {
+					username: this.state.username,
+					password: this.state.password
+				}
+			};
+
+			axios
+				.get('http://localhost:5000/api/login', config)
+				.then((response) => {
+					console.log(response.data);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
 	}
 
 	render() {
@@ -28,7 +67,7 @@ class LandingPage extends React.Component {
 					</div>
 					<div className="d-flex flex-column landing-container justify-content-center align-items-center">
 						<div className="card login-card form-container mb-3">
-							<form className="d-flex flex-column">
+							<form className="d-flex flex-column" onSubmit={this.onFormSubmit}>
 								<h3 className="align-self-center">Login</h3>
 								<div class="form-group">
 									<label for="username">Username</label>
@@ -40,16 +79,11 @@ class LandingPage extends React.Component {
 									/>
 								</div>
 								<div class="form-group">
-									<label for="exampleInputPassword1">Password</label>
-									<input
-										type="password"
-										class="form-control"
-										id="exampleInputPassword1"
-										placeholder="Password"
-									/>
+									<label for="password">Password</label>
+									<input type="password" class="form-control" id="password" placeholder="Password" />
 								</div>
 
-								<button type="button" class="btn btn-secondary btn-sm">
+								<button type="submit" class="btn btn-secondary btn-sm">
 									Login
 								</button>
 							</form>
