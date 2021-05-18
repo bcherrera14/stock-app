@@ -47,6 +47,7 @@ class LandingPage extends React.Component {
 				.get('http://localhost:5000/api/login', config)
 				.then((response) => {
 					console.log(response.data);
+					window.localStorage.setItem('user_id', response.data.id);
 				})
 				.catch((error) => {
 					console.log(error);

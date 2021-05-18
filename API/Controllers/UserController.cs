@@ -64,5 +64,22 @@ namespace API.Controllers
             }
             return Ok(string.Format("Created New User {0} {1}", firstname, lastname));
         }
+
+        //Delete User
+        [HttpGet("api/user/delete")]
+        public  ActionResult PostUser(string user_id)
+        {
+            using (var session = _sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    var user = session.Query<User>()
+                        .Where(u => u.id == user_id).FirstOrDefault(); 
+                    session.Delete(user);
+                    transaction.Commit();
+                }
+            }
+            return Ok(string.Format("Deleted User id: {0}", user_id));
+        }
     }
 }

@@ -24,22 +24,17 @@ namespace API.Controllers
         [HttpGet("api/login")]
         public ActionResult<User> GetAuth(string username, string password)
         {
-            // return Ok("Users!");
             using (var session = _sessionFactory.OpenSession())
             {
-                using (var tx = session.BeginTransaction()) {
-                    var users = session.CreateCriteria<User>().List<User>();
-                    foreach (var user in users) { 
-                        if(user.username == username && user.password == password){
-                            // return Ok("Logged In!");
-                            return user;
-
-                            // Console.WriteLine("LoggedIn");
-                        }
-                    }
+                var user = session.Query<User>()
+                        .Where(u => u.username == username).FirstOrDefault(); 
+                
+                if(user != null && user.password == password){
+                    return user;
+                }else{
+                    return NotFound("User Not Found.");
                 }
             }
-            return NotFound("User Not Found.");
         }
     }
 }
