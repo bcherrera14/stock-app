@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NHibernate;
+using NHibernate.Linq;
 using API.Models;
+
 
 namespace API.Controllers
 {
@@ -33,25 +35,13 @@ namespace API.Controllers
 
         //Get User by ID
         [HttpGet("api/user/id")]
-        public ActionResult GetUser()
+        public ActionResult<User> GetUser()
         {
             using (var session = _sessionFactory.OpenSession()) {
-                using (var tx = session.BeginTransaction()) { 
-                    var students = session.CreateCriteria<User>().List<User>(); 
-                    
-                    foreach (var student in students) { 
-                        Console.WriteLine("{0} \t{1} \t{2}", student.id, 
-                            student.firstname, student.lastname); 
-                    }
-                    
-                    var stdnt = session.Get<User>("1c74b96a066e48aa820da3d66ecc9d1a"); 
-                    Console.WriteLine("Retrieved by ID"); 
-                    Console.WriteLine("{0} \t{1} \t{2}", stdnt.id, 
-                        stdnt.firstname, stdnt.lastname); 
-                    tx.Commit();
-                } 
+                    var user = session.Query<User>()
+                        .Where(u => u.firstname == "Bryan").First(); 
+                    return user;
             }
-            return Ok("Found User");
         }
 
         //Create User
