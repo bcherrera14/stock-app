@@ -1,11 +1,19 @@
 html,
 body {
+	/* height: 100%;
+	margin: 0;
+	background-image: url(./Images/landing.jpg);
+	background-repeat: no-repeat;
+	background-size: cover; */
+	font-family: Roboto;
+}
+
+.splash-page {
 	height: 100%;
 	margin: 0;
 	background-image: url(./Images/landing.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-	font-family: Roboto;
 }
 
 .navbar-text {
@@ -71,4 +79,29 @@ form {
 	width: 20px;
 	display: block;
 	color: aliceblue;
+}
+
+.sidebar {
+	width: 280px;
+	height: 100vh;
+}
+
+.sidebar span {
+	font-size: x-large;
+}
+
+.sidebar .rocket-launch {
+	width: 32px;
+	height: 32px;
+	background-repeat: no-repeat;
+
+	/* height: 32px; */
+}
+
+hr {
+	margin: 1rem 0;
+	color: inherit;
+	background-color: gray;
+	border: 1;
+	/* opacity: .25; */
 }

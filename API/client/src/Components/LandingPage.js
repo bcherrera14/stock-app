@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from './Header';
+
 import SignUpModal from './SignUpModal';
 import axios from 'axios';
 
@@ -57,7 +59,8 @@ class LandingPage extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="splash-page">
+				<Header />
 				<div className="landing-page d-flex justify-content-center align-items-center">
 					<div className="description d-flex flex-column landing-container justify-content-center align-items-start p-5">
 						<h2 className="m-3">Build your risk free portfolio</h2>
