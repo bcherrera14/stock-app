@@ -86,13 +86,17 @@ form {
 	height: 100vh;
 }
 
+.bg-dark {
+	background-color: #212529 !important;
+}
+
 .sidebar span {
 	font-size: x-large;
 }
 
 .sidebar .rocket-launch {
-	width: 32px;
-	height: 32px;
+	width: 20px;
+	height: 20px;
 	background-repeat: no-repeat;
 
 	/* height: 32px; */
@@ -104,4 +108,12 @@ hr {
 	background-color: gray;
 	border: 1;
 	/* opacity: .25; */
+}
+
+.portfolio {
+	width: 100%;
+}
+
+.shares-data {
+	width: 30%;
 }
