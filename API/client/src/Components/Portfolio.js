@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SideNavBar from './SideNavBar';
 import SharesCard from './SharesCard';
+import StockModal from './StockModal';
 
 class Portfolio extends React.Component {
 	constructor(props) {
@@ -9,6 +10,13 @@ class Portfolio extends React.Component {
 		this.state = {
 			user_id: ''
 		};
+		this.setModalShow = this.setModalShow.bind(this);
+	}
+
+	setModalShow(bool) {
+		this.setState({
+			modalShow: bool
+		});
 	}
 
 	render() {
@@ -16,7 +24,7 @@ class Portfolio extends React.Component {
 			<div className="portfolio">
 				<div className="d-flex align-items-center m-4">
 					<h1 className="mb-0">My Portfolio</h1>
-					<button type="button" class="btn btn-primary ml-auto">
+					<button type="button" class="btn btn-primary ml-auto" onClick={() => this.setModalShow(true)}>
 						Purchase Stocks
 					</button>
 				</div>
@@ -24,6 +32,11 @@ class Portfolio extends React.Component {
 				<SharesCard />
 				<SharesCard />
 				<SharesCard />
+				<StockModal
+					// tweet={this.state.randomTweet}
+					show={this.state.modalShow}
+					onHide={() => this.setModalShow(false)}
+				/>
 			</div>
 		);
 	}
