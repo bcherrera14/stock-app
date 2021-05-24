@@ -82,13 +82,13 @@ class StockModal extends React.Component {
 						</form>
 						<div className="card m-3" id="stock-search-result">
 							<div class="card-body form-row align-items-center justify-content-between">
-								<div className="col-4 my-1 d-flex justify-content-between">
+								<div className="col-5 my-1 d-flex justify-content-between">
 									<span className="mr-auto">{this.state.stockName}</span>{' '}
 									<strong>${this.state.stockPrice}</strong>
 								</div>
-								<div className="col-auto d-flex justify-content-end">
+								<div className=" d-flex justify-content-end">
 									<input
-										class="col-sm-4 mr-4 form-control form-control-sm"
+										class="col-4 mr-4 form-control form-control-sm"
 										type="text"
 										placeholder="Quantity"
 									/>

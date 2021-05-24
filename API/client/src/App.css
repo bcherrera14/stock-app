@@ -118,10 +118,10 @@ hr {
 	width: 30%;
 }
 
-.stock-input {
-	width: 500px;
-}
-
 #stock-search-result {
 	visibility: hidden;
+}
+
+.stock-modal {
+	width: 700px;
 }
