@@ -7,71 +7,47 @@ class StockModal extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			firstName: '',
-			lastName: '',
-			username: '',
-			password: ''
+			stockSymbol: '',
+			stockName: '',
+			stockPrice: ''
 		};
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (prevState.username !== this.state.username) {
-			console.log(this.state);
+		if (prevState.stockSymbol !== this.state.stockSymbol) {
 			let config = {
 				params: {
-					firstname: this.state.firstName,
-					lastname: this.state.lastName,
-					username: this.state.username,
-					password: this.state.password
+					stockSymbol: this.state.stockSymbol
 				}
 			};
 
 			axios
-				.post('http://localhost:5000/api/users', null, config)
+				.get('http://localhost:5000/api/stocks/search', config)
 				.then((response) => {
-					console.log(response);
+					console.log(response.data);
+					this.setState({
+						stockName: response.data.companyName,
+						stockPrice: response.data.latestPrice
+					});
 				})
 				.catch((error) => {
 					console.log(error);
 				});
 		}
+		if (prevState.stockPrice !== this.state.stockPrice) {
+			let searchResult = document.getElementById('stock-search-result');
+			searchResult.style.visibility = 'visible';
+		}
 	}
 
 	onFormSubmit(e) {
 		e.preventDefault();
-		// console.log(e.target.password1.value);
-		const firstName = e.target.firstname.value;
-		const lastName = e.target.lastname.value;
-		const username = e.target.username.value;
-		const password1 = e.target.password1.value;
-		const password2 = e.target.password2.value;
-
-		if (firstName && lastName && username && password1 && password2 !== null) {
-			if (password1 === password2) {
-				this.setState({
-					firstName: e.target.firstname.value,
-					lastName: e.target.lastname.value,
-					username: e.target.username.value,
-					password: e.target.password1.value
-				});
-			} else {
-				alert('Passwords do not match');
-			}
-		} else {
-			alert('Please fill complete the form.');
-		}
-
-		// if (e.target.password1.value === e.target.password2.value) {
-		// 	this.setState({
-		// 		firstName: e.target.firstname.value,
-		// 		lastName: e.target.lastname.value,
-		// 		username: e.target.username.value,
-		// 		password: e.target.password1.value
-		// 	});
-		// } else {
-		// 	alert('Passwords do not match');
-		// }
+		const stockSymbol = e.target.stockSymbol.value.toUpperCase();
+		console.log(stockSymbol);
+		this.setState({
+			stockSymbol
+		});
 	}
 
 	render() {
@@ -90,23 +66,25 @@ class StockModal extends React.Component {
 								<input
 									type="text"
 									class="form-control"
-									aria-label="Recipient's username"
-									aria-describedby="passwordHelpBlock"
+									id="stockSymbol"
+									aria-label="Stock Symbol"
+									aria-describedby="stockSymbol"
 								/>
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" id="button-addon2">
+									<button class="btn btn-outline-secondary" type="submit" id="button-addon2">
 										Search
 									</button>
 								</div>
 							</div>
-							<small id="passwordHelpBlock" class="form-text text-muted">
+							<small id="stock-example" class="form-text text-muted">
 								Please enter a ticker symbol. Ex: AAPL
 							</small>
 						</form>
 						<div className="card m-3" id="stock-search-result">
 							<div class="card-body form-row align-items-center justify-content-between">
 								<div className="col-4 my-1 d-flex justify-content-between">
-									<span className="mr-auto">Stock Name</span> <strong>$8.57</strong>
+									<span className="mr-auto">{this.state.stockName}</span>{' '}
+									<strong>${this.state.stockPrice}</strong>
 								</div>
 								<div className="col-auto d-flex justify-content-end">
 									<input
