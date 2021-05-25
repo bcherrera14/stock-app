@@ -11,6 +11,6 @@ namespace API.Models
         public virtual string lastname { get; set; }
         public virtual string username { get; set; }
         public virtual string password { get; set; }
-        public virtual int accountbalance { get; set; }
+        public virtual decimal accountbalance { get; set; }
     }
 }

@@ -11,7 +11,7 @@
       <property name = "lastname" column="lastname" type="string"/>
       <property name = "username" column="username" type="string"/> 
       <property name = "password" column="password" type="string"/>
-      <property name = "accountbalance" column="accountbalance" type="int"/>
+      <property name = "accountbalance" column="accountbalance" type="decimal"/>
 
    </class> 
    

@@ -84,7 +84,7 @@ namespace API.Controllers
 
         //Update account balance
         [HttpPost("api/user/id")]
-        public  ActionResult PostBalance(string user_id, int accountbalance)
+        public  ActionResult PostBalance(string user_id, decimal accountbalance)
         {
             using (var session = _sessionFactory.OpenSession())
             {

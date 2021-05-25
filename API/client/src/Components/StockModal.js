@@ -12,7 +12,7 @@ class StockModal extends React.Component {
 			stockName: '',
 			stockPrice: '',
 			totalshares: 0,
-			accountBalance: ''
+			accountBalance: 0
 		};
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.purchaseStocks = this.purchaseStocks.bind(this);
@@ -29,10 +29,7 @@ class StockModal extends React.Component {
 			.then((response) => {
 				console.log(response.data);
 				this.setState({
-					accountBalance: response.data.accountbalance.toLocaleString('en-US', {
-						style: 'currency',
-						currency: 'USD'
-					})
+					accountBalance: parseFloat(response.data.accountbalance)
 				});
 			})
 			.catch((error) => {
@@ -54,10 +51,7 @@ class StockModal extends React.Component {
 					console.log(response.data);
 					this.setState({
 						stockName: response.data.companyName,
-						stockPrice: parseInt(response.data.latestPrice).toLocaleString('en-US', {
-							style: 'currency',
-							currency: 'USD'
-						})
+						stockPrice: parseFloat(response.data.latestPrice)
 					});
 				})
 				.catch((error) => {
@@ -80,9 +74,47 @@ class StockModal extends React.Component {
 	}
 
 	purchaseStocks(e) {
-		e.preventDefault();
+		// e.preventDefault();
 		const shares = e.target.shares.value;
+		const purchasePrice = parseInt(shares) * this.state.stockPrice;
+		const updatedAcountBalance = this.state.accountBalance - purchasePrice;
+		console.log(purchasePrice);
 		console.log(shares);
+		console.log(updatedAcountBalance);
+		const config1 = {
+			params: {
+				user_id: this.state.user_id,
+				companyname: this.state.stockName,
+				totalshares: shares,
+				purchaseprice: this.state.stockPrice,
+				symbol: this.state.stockSymbol
+			}
+		};
+		const config2 = {
+			params: {
+				user_id: this.state.user_id,
+				accountbalance: updatedAcountBalance
+			}
+		};
+		axios
+			.all([
+				axios.post('http://localhost:5000/api/stocks', null, config1),
+				axios.post('http://localhost:5000/api/user/id', null, config2)
+			])
+			.then(
+				axios.spread((data1, data2) => {
+					console.log('data1', data1, 'data2', data2);
+				})
+			)
+			.catch((error) => {
+				console.log(error);
+			});
+
+		// .then(window.location.reload());
+
+		// if (purchasePrice < this.state.accountBalance) {
+		// 	console.log(purchasePrice);
+		// }
 	}
 
 	render() {
@@ -94,7 +126,12 @@ class StockModal extends React.Component {
 							<h3 className="align-self-center">Purchase Stocks</h3>
 							<hr />
 							<p>
-								Account Balance: <strong>{this.state.accountBalance}</strong>
+								Account Balance:{' '}
+								<strong>
+									{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+										this.state.accountBalance
+									)}
+								</strong>
 							</p>
 
 							<div className="input-group mb-3 stock-input">
@@ -122,7 +159,11 @@ class StockModal extends React.Component {
 							>
 								<div className="col-5 my-1 d-flex justify-content-between">
 									<span className="mr-auto">{this.state.stockName}</span>{' '}
-									<strong>{this.state.stockPrice}</strong>
+									<strong>
+										{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+											this.state.stockPrice
+										)}
+									</strong>
 								</div>
 								<div className=" d-flex justify-content-end">
 									<input

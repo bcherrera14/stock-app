@@ -76,7 +76,7 @@ class LandingPage extends React.Component {
 							<form className="d-flex flex-column" onSubmit={this.onFormSubmit}>
 								<h3 className="align-self-center">Login</h3>
 								<div className="form-group">
-									<label for="username">Username</label>
+									<label>Username</label>
 									<input
 										type="text"
 										className="form-control"
@@ -85,7 +85,7 @@ class LandingPage extends React.Component {
 									/>
 								</div>
 								<div className="form-group">
-									<label for="password">Password</label>
+									<label>Password</label>
 									<input
 										type="password"
 										className="form-control"
