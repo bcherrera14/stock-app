@@ -81,5 +81,23 @@ namespace API.Controllers
             }
             return Ok(string.Format("Deleted User id: {0}", user_id));
         }
+
+        //Update account balance
+        [HttpPost("api/user/id")]
+        public  ActionResult PostBalance(string user_id, int accountbalance)
+        {
+            using (var session = _sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    var user = session.Query<User>()
+                        .Where(u => u.id == user_id).First(); 
+                    user.accountbalance = accountbalance;
+                    session.Update(user);
+                    transaction.Commit();
+                }
+            }
+            return Ok(string.Format("Updated User Balance"));
+        }
     }
 }

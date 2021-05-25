@@ -24,7 +24,7 @@ class Portfolio extends React.Component {
 			<div className="portfolio">
 				<div className="d-flex align-items-center m-4">
 					<h1 className="mb-0">My Portfolio</h1>
-					<button type="button" class="btn btn-primary ml-auto" onClick={() => this.setModalShow(true)}>
+					<button type="button" className="btn btn-primary ml-auto" onClick={() => this.setModalShow(true)}>
 						Purchase Stocks
 					</button>
 				</div>

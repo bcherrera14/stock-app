@@ -27,13 +27,13 @@ class SideNavBar extends React.Component {
 				<ul className="nav nav-pills nav-fill flex-column">
 					<li className="nav-item">
 						<a href="/portfolio" className="nav-link active d-flex align-items-center" aria-current="page">
-							<i class="fas fa-home mr-2" />
+							<i className="fas fa-home mr-2" />
 							Portfolio
 						</a>
 					</li>
 					<li className="nav-item">
 						<a className="nav-link d-flex align-items-center text-white" href="/dashboard">
-							<i class="fas fa-chart-line mr-2" />
+							<i className="fas fa-chart-line mr-2" />
 							Dashboard
 						</a>
 					</li>
@@ -45,7 +45,7 @@ class SideNavBar extends React.Component {
 						href="/"
 						onClick={() => this.logoutUser()}
 					>
-						<i class="fas fa-sign-out-alt mr-2" />
+						<i className="fas fa-sign-out-alt mr-2" />
 						Logout
 					</a>
 				</div>

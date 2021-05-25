@@ -6,7 +6,7 @@ const SharesCard = () => {
 			<div className="d-flex">
 				<div className="d-flex flex-column mr-auto m-3">
 					<h4>Stock Name</h4>
-					<button type="button" class="btn btn-secondary btn-sm mt-2">
+					<button type="button" className="btn btn-secondary btn-sm mt-2">
 						Sell
 					</button>
 				</div>

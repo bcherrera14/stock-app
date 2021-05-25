@@ -81,43 +81,43 @@ class SignUpModal extends React.Component {
 					<div className="signup-form">
 						<form className="d-flex flex-column" onSubmit={this.onFormSubmit}>
 							<h3 className="align-self-center">Sign Up</h3>
-							<div class="form-group">
+							<div className="form-group">
 								<label for="firstName">First Name</label>
 								<input
 									type="text"
-									class="form-control form-control-sm"
+									className="form-control form-control-sm"
 									id="firstname"
 									aria-describedby=""
 								/>
 							</div>
-							<div class="form-group">
+							<div className="form-group">
 								<label for="lastName">Last Name</label>
 								<input
 									type="text"
-									class="form-control form-control-sm"
+									className="form-control form-control-sm"
 									id="lastname"
 									aria-describedby=""
 								/>
 							</div>
-							<div class="form-group">
+							<div className="form-group">
 								<label for="username">Username</label>
 								<input
 									type="text"
-									class="form-control form-control-sm"
+									className="form-control form-control-sm"
 									id="username"
 									aria-describedby=""
 								/>
 							</div>
-							<div class="form-group">
+							<div className="form-group">
 								<label for="Password1">Password</label>
-								<input type="password" class="form-control form-control-sm" id="password1" />
+								<input type="password" className="form-control form-control-sm" id="password1" />
 							</div>
-							<div class="form-group">
+							<div className="form-group">
 								<label for="Password2">Retype Password</label>
-								<input type="password" class="form-control form-control-sm" id="password2" />
+								<input type="password" className="form-control form-control-sm" id="password2" />
 							</div>
 
-							<button type="submit" class="btn btn-secondary btn-sm">
+							<button type="submit" className="btn btn-secondary btn-sm">
 								Sign Up
 							</button>
 						</form>

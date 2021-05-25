@@ -75,21 +75,26 @@ class LandingPage extends React.Component {
 						<div className="card login-card form-container mb-3">
 							<form className="d-flex flex-column" onSubmit={this.onFormSubmit}>
 								<h3 className="align-self-center">Login</h3>
-								<div class="form-group">
+								<div className="form-group">
 									<label for="username">Username</label>
 									<input
 										type="text"
-										class="form-control"
+										className="form-control"
 										id="username"
 										placeholder="Enter username"
 									/>
 								</div>
-								<div class="form-group">
+								<div className="form-group">
 									<label for="password">Password</label>
-									<input type="password" class="form-control" id="password" placeholder="Password" />
+									<input
+										type="password"
+										className="form-control"
+										id="password"
+										placeholder="Password"
+									/>
 								</div>
 
-								<button type="submit" class="btn btn-secondary btn-sm">
+								<button type="submit" className="btn btn-secondary btn-sm">
 									Login
 								</button>
 							</form>

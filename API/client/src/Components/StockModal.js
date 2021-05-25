@@ -7,11 +7,37 @@ class StockModal extends React.Component {
 	constructor() {
 		super();
 		this.state = {
+			user_id: window.localStorage.getItem('user_id'),
 			stockSymbol: '',
 			stockName: '',
-			stockPrice: ''
+			stockPrice: '',
+			totalshares: 0,
+			accountBalance: ''
 		};
 		this.onFormSubmit = this.onFormSubmit.bind(this);
+		this.purchaseStocks = this.purchaseStocks.bind(this);
+	}
+
+	componentDidMount() {
+		let config = {
+			params: {
+				user_id: this.state.user_id
+			}
+		};
+		axios
+			.get('http://localhost:5000/api/user/id', config)
+			.then((response) => {
+				console.log(response.data);
+				this.setState({
+					accountBalance: response.data.accountbalance.toLocaleString('en-US', {
+						style: 'currency',
+						currency: 'USD'
+					})
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -28,7 +54,10 @@ class StockModal extends React.Component {
 					console.log(response.data);
 					this.setState({
 						stockName: response.data.companyName,
-						stockPrice: response.data.latestPrice
+						stockPrice: parseInt(response.data.latestPrice).toLocaleString('en-US', {
+							style: 'currency',
+							currency: 'USD'
+						})
 					});
 				})
 				.catch((error) => {
@@ -50,6 +79,12 @@ class StockModal extends React.Component {
 		});
 	}
 
+	purchaseStocks(e) {
+		e.preventDefault();
+		const shares = e.target.shares.value;
+		console.log(shares);
+	}
+
 	render() {
 		return (
 			<Modal {...this.props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
@@ -59,44 +94,48 @@ class StockModal extends React.Component {
 							<h3 className="align-self-center">Purchase Stocks</h3>
 							<hr />
 							<p>
-								Account Balance: <strong>$100,000.00</strong>
+								Account Balance: <strong>{this.state.accountBalance}</strong>
 							</p>
 
-							<div class="input-group mb-3 stock-input">
+							<div className="input-group mb-3 stock-input">
 								<input
 									type="text"
-									class="form-control"
+									className="form-control"
 									id="stockSymbol"
 									aria-label="Stock Symbol"
 									aria-describedby="stockSymbol"
 								/>
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+								<div className="input-group-append">
+									<button className="btn btn-outline-secondary" type="submit" id="button-addon2">
 										Search
 									</button>
 								</div>
 							</div>
-							<small id="stock-example" class="form-text text-muted">
+							<small id="stock-example" className="form-text text-muted">
 								Please enter a ticker symbol. Ex: AAPL
 							</small>
 						</form>
 						<div className="card m-3" id="stock-search-result">
-							<div class="card-body form-row align-items-center justify-content-between">
+							<form
+								className="card-body form-row align-items-center justify-content-between"
+								onSubmit={this.purchaseStocks}
+							>
 								<div className="col-5 my-1 d-flex justify-content-between">
 									<span className="mr-auto">{this.state.stockName}</span>{' '}
-									<strong>${this.state.stockPrice}</strong>
+									<strong>{this.state.stockPrice}</strong>
 								</div>
 								<div className=" d-flex justify-content-end">
 									<input
-										class="col-4 mr-4 form-control form-control-sm"
+										id="shares"
+										className="col-4 mr-4 form-control form-control-sm"
 										type="text"
 										placeholder="Quantity"
 									/>
-									<button type="button" class="btn btn-primary btn-sm">
+									<button type="submit" className="btn btn-primary btn-sm">
 										Buy
 									</button>
 								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 				</Modal.Body>
