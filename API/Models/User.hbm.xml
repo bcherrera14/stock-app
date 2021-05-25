@@ -3,7 +3,7 @@
 <hibernate-mapping xmlns = "urn:nhibernate-mapping-2.2" 
    assembly = "API" namespace = "API.Models">
 
-   <class name = "User" table="users">
+   <class name = "User" table="`users`">
 	   <id name = "id" column="id" type="string">
          <generator class = "uuid.hex"/>
       </id>
@@ -11,7 +11,8 @@
       <property name = "lastname" column="lastname" type="string"/>
       <property name = "username" column="username" type="string"/> 
       <property name = "password" column="password" type="string"/>
-      <property name = "accountbalance" column="accountbalance" type="int"/>  
+      <property name = "accountbalance" column="accountbalance" type="int"/>
+
    </class> 
    
 </hibernate-mapping>

@@ -1,3 +1,7 @@
+using System; 
+using System.Text; 
+using Iesi.Collections.Generic;
+
 namespace API.Models
 {
     public class User

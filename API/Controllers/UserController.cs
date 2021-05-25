@@ -35,11 +35,11 @@ namespace API.Controllers
 
         //Get User by ID
         [HttpGet("api/user/id")]
-        public ActionResult<User> GetUser()
+        public ActionResult<User> GetUser(string user_id)
         {
             using (var session = _sessionFactory.OpenSession()) {
                     var user = session.Query<User>()
-                        .Where(u => u.firstname == "Bryan").First(); 
+                        .Where(u => u.id == user_id).First(); 
                     return user;
             }
         }
