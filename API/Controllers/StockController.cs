@@ -49,7 +49,7 @@ namespace API.Controllers
 
         //Create Stock Holding
         [HttpPost("api/stocks")]
-        public  ActionResult PostStocks(string user_id, string companyname, int totalshares, string purchaseprice)
+        public  ActionResult PostStocks(string user_id, string companyname, string symbol, int totalshares, string purchaseprice)
         {
             using (var session = _sessionFactory.OpenSession())
             {
@@ -58,6 +58,7 @@ namespace API.Controllers
                     var newStock = new StockData();
                     newStock.user_id = user_id;
                     newStock.companyname = companyname;
+                    newStock.symbol = symbol;
                     newStock.totalshares = totalshares;
                     newStock.purchaseprice = purchaseprice;
                     session.Save(newStock);
