@@ -9,6 +9,10 @@ class SideNavBar extends React.Component {
 		};
 	}
 
+	logoutUser() {
+		localStorage.removeItem('user_id');
+	}
+
 	render() {
 		return (
 			<div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar">
@@ -36,7 +40,11 @@ class SideNavBar extends React.Component {
 				</ul>
 				<div className="mt-auto">
 					<hr />
-					<a className="nav-link d-flex align-items-center text-white" href="/dashboard">
+					<a
+						className="nav-link d-flex align-items-center text-white"
+						href="/"
+						onClick={() => this.logoutUser()}
+					>
 						<i class="fas fa-sign-out-alt mr-2" />
 						Logout
 					</a>

@@ -32,11 +32,7 @@ class Portfolio extends React.Component {
 				<SharesCard />
 				<SharesCard />
 				<SharesCard />
-				<StockModal
-					// tweet={this.state.randomTweet}
-					show={this.state.modalShow}
-					onHide={() => this.setModalShow(false)}
-				/>
+				<StockModal show={this.state.modalShow} onHide={() => this.setModalShow(false)} />
 			</div>
 		);
 	}

@@ -3,6 +3,7 @@ import Header from './Header';
 
 import SignUpModal from './SignUpModal';
 import axios from 'axios';
+import history from '../History';
 
 class LandingPage extends React.Component {
 	constructor(props) {
@@ -50,6 +51,7 @@ class LandingPage extends React.Component {
 				.then((response) => {
 					console.log(response.data);
 					window.localStorage.setItem('user_id', response.data.id);
+					history.push('/portfolio');
 				})
 				.catch((error) => {
 					console.log(error);
