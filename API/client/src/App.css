@@ -125,3 +125,12 @@ hr {
 .stock-modal {
 	width: 700px;
 }
+
+.sell-btn {
+	width: 100px;
+}
+
+.shares-card {
+	max-width: 1000px;
+	min-width: 800px;
+}

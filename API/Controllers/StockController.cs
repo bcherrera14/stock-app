@@ -26,15 +26,31 @@ namespace API.Controllers
             _sessionFactory = factory;
         }
 
+        //Get Single Stock Info
         [HttpGet("api/stocks/search")]
         public async Task<StockResponse> GetStock(string stockSymbol)
             {
                 HttpResponseMessage response = await client.GetAsync($"https://sandbox.iexapis.com/stable/stock/{stockSymbol}/quote?token=Tpk_d666d25d0bdf4d1b9653dc40e7f6657f");
                 string stockString = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<StockResponse>(stockString);
+                
+            }
+        
+        //Get Multiple Stock Info
+        [HttpGet("api/stocks/search/all")]
+        public async Task<StockList> GetAllStocks(string stockList)
+            {
+                HttpResponseMessage response = await client.GetAsync($"https://sandbox.iexapis.com/stable/stock/market/batch?token=Tpk_d666d25d0bdf4d1b9653dc40e7f6657f&symbols={stockList}&types=quote");
+                string stockString = await response.Content.ReadAsStringAsync();
+                var result = stockString.Trim('{').Trim('}');
+                // result = "[" + stockString + "]";
+                // var result = "\"Stocks\":{" + stockString + "}";
+                // Console.WriteLine(result);
+
+                // return stockString;
+                return JsonConvert.DeserializeObject<StockList>(stockString);
                 // var result = stockString.Trim('[').Trim(']');
                 // return JsonConvert.DeserializeObject<StockResponse>(result);
-                //Console.WriteLine(stockString);
             }
 
         [HttpGet("api/stocks/id")]

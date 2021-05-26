@@ -19,22 +19,23 @@ class StockModal extends React.Component {
 	}
 
 	componentDidMount() {
-		let config = {
-			params: {
-				user_id: this.state.user_id
-			}
-		};
-		axios
-			.get('http://localhost:5000/api/user/id', config)
-			.then((response) => {
-				console.log(response.data);
-				this.setState({
-					accountBalance: parseFloat(response.data.accountbalance)
-				});
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		// let config = {
+		// 	params: {
+		// 		user_id: this.state.user_id
+		// 	}
+		// };
+		// axios
+		// 	.get('http://localhost:5000/api/user/id', config)
+		// 	.then((response) => {
+		// 		console.log('stockmodal');
+		// 		console.log(response.data);
+		// 		this.setState({
+		// 			accountBalance: parseFloat(response.data.accountbalance)
+		// 		});
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 	});
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -62,6 +63,11 @@ class StockModal extends React.Component {
 			let searchResult = document.getElementById('stock-search-result');
 			searchResult.style.visibility = 'visible';
 		}
+		if (prevState.accountBalance !== this.state.accountBalance && this.props.modalState) {
+			let searchResult = document.getElementById('stock-search-result');
+			searchResult.style.visibility = 'hidden';
+			this.props.onHide();
+		}
 	}
 
 	onFormSubmit(e) {
@@ -74,7 +80,7 @@ class StockModal extends React.Component {
 	}
 
 	purchaseStocks(e) {
-		// e.preventDefault();
+		e.preventDefault();
 		const shares = e.target.shares.value;
 		const purchasePrice = parseInt(shares) * this.state.stockPrice;
 		const updatedAcountBalance = this.state.accountBalance - purchasePrice;
@@ -104,6 +110,11 @@ class StockModal extends React.Component {
 			.then(
 				axios.spread((data1, data2) => {
 					console.log('data1', data1, 'data2', data2);
+				})
+			)
+			.then(
+				this.setState({
+					accountBalance: updatedAcountBalance
 				})
 			)
 			.catch((error) => {

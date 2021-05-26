@@ -8,4 +8,11 @@ namespace API
         public string symbol { get; set; }
         public string latestPrice { get; set; }
     }
+
+
+
+    public class StockList
+    {
+        public string Stocks { get; set; }
+    }
 }
