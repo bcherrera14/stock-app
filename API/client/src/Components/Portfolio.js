@@ -13,7 +13,7 @@ class Portfolio extends React.Component {
 			modalShow: false,
 			shares: [],
 			accountBalance: 0,
-			currentPrices: {}
+			currentPrices: null
 		};
 		this.setModalShow = this.setModalShow.bind(this);
 		this.getCurrentStockPrice = this.getCurrentStockPrice.bind(this);
@@ -26,6 +26,12 @@ class Portfolio extends React.Component {
 		});
 	}
 
+	setStockShow() {
+		if (this.state.currentPrices !== {}) {
+			return <SharesList shares={this.state.shares} currentPrices={this.state.currentPrices} />;
+		}
+	}
+
 	getUsersStocks() {
 		let config = {
 			params: {
@@ -35,7 +41,7 @@ class Portfolio extends React.Component {
 		axios
 			.get('http://localhost:5000/api/stocks/id', config)
 			.then((response) => {
-				// console.log(response.data);
+				console.log(response.data);
 				//console.log(this.state);
 				this.setState({
 					shares: response.data
@@ -77,8 +83,6 @@ class Portfolio extends React.Component {
 		let symbolList = [];
 		this.state.shares.forEach((share) => symbolList.push(share.symbol));
 		symbolList = [ ...new Set(symbolList) ];
-		symbolList.toString().replace('[', '').replace(']', '');
-		// console.log(symbolList);
 
 		let config = {
 			params: {
@@ -88,7 +92,7 @@ class Portfolio extends React.Component {
 		axios
 			.get('http://localhost:5000/api/stocks/search/all', config)
 			.then((response) => {
-				// console.log(response.data);
+				console.log(response.data);
 				// console.log(this.state);
 				this.setState({
 					currentPrices: response.data
@@ -125,12 +129,16 @@ class Portfolio extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.shares !== this.state.shares) {
+			console.log('Getting Curent Price');
 			this.getCurrentStockPrice();
 		}
 		// console.log(this.state.currentPrices);
 	}
 
 	render() {
+		if (this.state.currentPrices !== null) {
+			console.log('REcieved current prices');
+		}
 		return (
 			<div className="portfolio">
 				<div className="d-flex align-items-center m-4">
@@ -140,10 +148,10 @@ class Portfolio extends React.Component {
 					</button>
 				</div>
 				<hr className="m-3" />
-				<SharesList shares={this.state.shares} currentPrices={this.state.currentPrices} />
-				{/* <SharesCard />
-				<SharesCard />
-				<SharesCard /> */}
+
+				{this.state.currentPrices !== null ? (
+					<SharesList shares={this.state.shares} currentPrices={this.state.currentPrices} />
+				) : null}
 				<StockModal
 					modalState={this.state.modalShow}
 					show={this.state.modalShow}

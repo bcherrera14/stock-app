@@ -30,7 +30,12 @@ class SharesCard extends React.Component {
 							<span>Total Shares</span> <strong>{this.props.stock.totalshares}</strong>
 						</div>
 						<div className="d-flex justify-content-between">
-							<span>List Price</span> <strong>${this.props.currentPrice.quote.latestPrice}</strong>
+							<span>List Price</span>{' '}
+							<strong>
+								{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+									this.props.currentPrice.quote.latestPrice
+								)}
+							</strong>
 						</div>
 					</div>
 				</div>
