@@ -18,18 +18,13 @@ class Portfolio extends React.Component {
 		this.setModalShow = this.setModalShow.bind(this);
 		this.getCurrentStockPrice = this.getCurrentStockPrice.bind(this);
 		this.getUsersStocks = this.getUsersStocks.bind(this);
+		this.getAccountBalance = this.getAccountBalance.bind(this);
 	}
 
 	setModalShow(bool) {
 		this.setState({
 			modalShow: bool
 		});
-	}
-
-	setStockShow() {
-		if (this.state.currentPrices !== {}) {
-			return <SharesList shares={this.state.shares} currentPrices={this.state.currentPrices} />;
-		}
 	}
 
 	getUsersStocks() {
@@ -51,33 +46,6 @@ class Portfolio extends React.Component {
 				console.log(error);
 			});
 	}
-
-	// getStockSymbol() {
-	// 	// for (const share in this.state.shares) {
-	// 	// 	console.log(share.symbol);
-	// 	// }
-	// 	// let symbolList = [...new Set(this.state.shares)];
-	// 	let symbolList = [];
-	// 	this.state.shares.forEach((share) => symbolList.push(share.symbol));
-	// 	symbolList = [ ...new Set(symbolList) ];
-	// 	let params = [];
-	// 	symbolList.forEach((symbol) => params.push({ params: { stockSymbol: symbol } }));
-	// 	//this.state.shares.forEach((share) => symbolList.push({ params: { stockSymbol: share.symbol } }));
-
-	// 	axios
-	// 		.all([
-	// 			axios.get('http://localhost:5000/api/stocks/search', params[0]),
-	// 			axios.get('http://localhost:5000/api/stocks/search', params[1]),
-	// 			axios.get('http://localhost:5000/api/stocks/search', params[2])
-	// 		])
-	// 		.then(
-	// 			axios.spread((...res) => {
-	// 				console.log(res);
-	// 			})
-	// 		);
-	// 	console.log(symbolList);
-	// 	console.log(params);
-	// }
 
 	getCurrentStockPrice() {
 		let symbolList = [];
@@ -112,7 +80,6 @@ class Portfolio extends React.Component {
 		axios
 			.get('http://localhost:5000/api/user/id', config)
 			.then((response) => {
-				console.log('stockmodal');
 				console.log(response.data);
 				this.setState({
 					accountBalance: parseFloat(response.data.accountbalance)
@@ -124,21 +91,17 @@ class Portfolio extends React.Component {
 	}
 
 	componentDidMount() {
+		this.getAccountBalance();
 		this.getUsersStocks();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.shares !== this.state.shares) {
-			console.log('Getting Curent Price');
 			this.getCurrentStockPrice();
 		}
-		// console.log(this.state.currentPrices);
 	}
 
 	render() {
-		if (this.state.currentPrices !== null) {
-			console.log('REcieved current prices');
-		}
 		return (
 			<div className="portfolio">
 				<div className="d-flex align-items-center m-4">
@@ -148,7 +111,25 @@ class Portfolio extends React.Component {
 					</button>
 				</div>
 				<hr className="m-3" />
+				<div className="m-4 d-flex justify-content-around">
+					<div className="d-flex">
+						<h4 className="mr-2">Account Balance:</h4>
 
+						<h4>
+							{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+								this.state.accountBalance
+							)}
+						</h4>
+					</div>
+					<div className="d-flex">
+						<h4 className="mr-2">Net Assets: </h4>
+						<h4>
+							{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+								this.state.accountBalance
+							)}
+						</h4>
+					</div>
+				</div>
 				{this.state.currentPrices !== null ? (
 					<SharesList shares={this.state.shares} currentPrices={this.state.currentPrices} />
 				) : null}
@@ -156,6 +137,7 @@ class Portfolio extends React.Component {
 					modalState={this.state.modalShow}
 					show={this.state.modalShow}
 					onHide={() => this.setModalShow(false)}
+					accountBalance={this.state.accountBalance}
 				/>
 			</div>
 		);

@@ -4,12 +4,26 @@ import axios from 'axios';
 class SharesCard extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = { class: 'green-text' };
 	}
 
 	componentDidMount() {}
 
+	currentSharesValue() {
+		return this.props.stock.totalshares * this.props.currentPrice.quote.latestPrice;
+	}
+
+	sharesGain() {
+		return (
+			(this.props.currentPrice.quote.latestPrice - this.props.stock.purchaseprice) * this.props.stock.totalshares
+		);
+	}
+
 	render() {
+		const priceChange = this.props.currentPrice.quote.latestPrice - this.props.stock.purchaseprice;
+		const gainTextColor = priceChange < 0 ? 'text-red' : 'text-green';
+		const gainText = priceChange < 0 ? 'Loss' : 'Gain';
+
 		return (
 			<div className="shares-card card ml-5 mr-5 mb-4 align-center">
 				<div className="d-flex">
@@ -21,19 +35,37 @@ class SharesCard extends React.Component {
 					</div>
 					<div className="d-flex flex-column m-3 shares-data">
 						<div className="d-flex justify-content-between">
-							<span className="mr-auto">Current Value</span> <strong>$5,000.00</strong>
+							<span className="mr-auto">Current Value</span>{' '}
+							<strong>
+								{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+									this.currentSharesValue()
+								)}
+							</strong>
 						</div>
 						<div className="d-flex justify-content-between">
-							<span className="mr-auto">Day's Gain</span> <strong>$219.00</strong>
+							<span className="mr-auto">Day's {gainText}</span>{' '}
+							<strong className={gainTextColor}>
+								{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+									this.sharesGain()
+								)}
+							</strong>
 						</div>
 						<div className="d-flex justify-content-between">
 							<span>Total Shares</span> <strong>{this.props.stock.totalshares}</strong>
 						</div>
 						<div className="d-flex justify-content-between">
-							<span>List Price</span>{' '}
+							<span>Current Price</span>{' '}
 							<strong>
 								{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
 									this.props.currentPrice.quote.latestPrice
+								)}
+							</strong>
+						</div>
+						<div className="d-flex justify-content-between">
+							<span>Purchased Price</span>{' '}
+							<strong>
+								{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+									this.props.stock.purchaseprice
 								)}
 							</strong>
 						</div>

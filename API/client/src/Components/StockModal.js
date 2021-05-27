@@ -19,23 +19,7 @@ class StockModal extends React.Component {
 	}
 
 	componentDidMount() {
-		// let config = {
-		// 	params: {
-		// 		user_id: this.state.user_id
-		// 	}
-		// };
-		// axios
-		// 	.get('http://localhost:5000/api/user/id', config)
-		// 	.then((response) => {
-		// 		console.log('stockmodal');
-		// 		console.log(response.data);
-		// 		this.setState({
-		// 			accountBalance: parseFloat(response.data.accountbalance)
-		// 		});
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 	});
+		this.setState({ accountBalance: this.props.accountBalance });
 	}
 
 	componentDidUpdate(prevProps, prevState) {

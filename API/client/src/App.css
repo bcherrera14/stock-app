@@ -134,3 +134,11 @@ hr {
 	max-width: 1000px;
 	min-width: 800px;
 }
+
+.text-red {
+	color: red;
+}
+
+.text-green {
+	color: green;
+}
