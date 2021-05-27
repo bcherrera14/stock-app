@@ -38,17 +38,18 @@ namespace API.Controllers
         
         //Get Multiple Stock Info
         [HttpGet("api/stocks/search/all")]
-        public async Task<StockList> GetAllStocks(string stockList)
+        public async Task<string> GetAllStocks(string stockList)
             {
-                HttpResponseMessage response = await client.GetAsync($"https://sandbox.iexapis.com/stable/stock/market/batch?token=Tpk_d666d25d0bdf4d1b9653dc40e7f6657f&symbols={stockList}&types=quote");
+                HttpResponseMessage response = await client.GetAsync($"https://sandbox.iexapis.com/stable/stock/market/batch?token=Tpk_d666d25d0bdf4d1b9653dc40e7f6657f&symbols={stockList}&types=quote&filter=symbol,latestPrice");
                 string stockString = await response.Content.ReadAsStringAsync();
-                var result = stockString.Trim('{').Trim('}');
+                // var result = stockString.Trim('{').Trim('}');
                 // result = "[" + stockString + "]";
                 // var result = "\"Stocks\":{" + stockString + "}";
-                // Console.WriteLine(result);
+                // Console.WriteLine(stockString);
+                return await response.Content.ReadAsStringAsync();
 
                 // return stockString;
-                return JsonConvert.DeserializeObject<StockList>(stockString);
+                // return JsonConvert.DeserializeObject<object>(stockString);
                 // var result = stockString.Trim('[').Trim(']');
                 // return JsonConvert.DeserializeObject<StockResponse>(result);
             }

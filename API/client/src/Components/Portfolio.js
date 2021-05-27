@@ -12,9 +12,12 @@ class Portfolio extends React.Component {
 			user_id: window.localStorage.getItem('user_id'),
 			modalShow: false,
 			shares: [],
-			accountBalance: 0
+			accountBalance: 0,
+			currentPrices: {}
 		};
 		this.setModalShow = this.setModalShow.bind(this);
+		this.getCurrentStockPrice = this.getCurrentStockPrice.bind(this);
+		this.getUsersStocks = this.getUsersStocks.bind(this);
 	}
 
 	setModalShow(bool) {
@@ -32,7 +35,7 @@ class Portfolio extends React.Component {
 		axios
 			.get('http://localhost:5000/api/stocks/id', config)
 			.then((response) => {
-				console.log(response.data);
+				// console.log(response.data);
 				//console.log(this.state);
 				this.setState({
 					shares: response.data
@@ -43,47 +46,53 @@ class Portfolio extends React.Component {
 			});
 	}
 
-	getStockSymbol() {
-		// for (const share in this.state.shares) {
-		// 	console.log(share.symbol);
-		// }
-		// let symbolList = [...new Set(this.state.shares)];
+	// getStockSymbol() {
+	// 	// for (const share in this.state.shares) {
+	// 	// 	console.log(share.symbol);
+	// 	// }
+	// 	// let symbolList = [...new Set(this.state.shares)];
+	// 	let symbolList = [];
+	// 	this.state.shares.forEach((share) => symbolList.push(share.symbol));
+	// 	symbolList = [ ...new Set(symbolList) ];
+	// 	let params = [];
+	// 	symbolList.forEach((symbol) => params.push({ params: { stockSymbol: symbol } }));
+	// 	//this.state.shares.forEach((share) => symbolList.push({ params: { stockSymbol: share.symbol } }));
+
+	// 	axios
+	// 		.all([
+	// 			axios.get('http://localhost:5000/api/stocks/search', params[0]),
+	// 			axios.get('http://localhost:5000/api/stocks/search', params[1]),
+	// 			axios.get('http://localhost:5000/api/stocks/search', params[2])
+	// 		])
+	// 		.then(
+	// 			axios.spread((...res) => {
+	// 				console.log(res);
+	// 			})
+	// 		);
+	// 	console.log(symbolList);
+	// 	console.log(params);
+	// }
+
+	getCurrentStockPrice() {
 		let symbolList = [];
 		this.state.shares.forEach((share) => symbolList.push(share.symbol));
 		symbolList = [ ...new Set(symbolList) ];
-		let params = [];
-		symbolList.forEach((symbol) => params.push({ params: { stockSymbol: symbol } }));
-		//this.state.shares.forEach((share) => symbolList.push({ params: { stockSymbol: share.symbol } }));
+		symbolList.toString().replace('[', '').replace(']', '');
+		// console.log(symbolList);
 
-		axios
-			.all([
-				axios.get('http://localhost:5000/api/stocks/search', params[0]),
-				axios.get('http://localhost:5000/api/stocks/search', params[1]),
-				axios.get('http://localhost:5000/api/stocks/search', params[2])
-			])
-			.then(
-				axios.spread((...res) => {
-					console.log(res);
-				})
-			);
-		console.log(symbolList);
-		console.log(params);
-	}
-
-	getCurrentStockPrice(symbol) {
 		let config = {
 			params: {
-				stockSymbol: symbol
+				stockList: symbolList.join(',')
 			}
 		};
 		axios
-			.get('http://localhost:5000/api/stocks/search', config)
+			.get('http://localhost:5000/api/stocks/search/all', config)
 			.then((response) => {
-				console.log(response.data);
+				// console.log(response.data);
 				// console.log(this.state);
-				// this.setState({
-				// 	currentPrice: response.data.latestPrice
-				// });
+				this.setState({
+					currentPrices: response.data
+				});
 			})
 			.catch((error) => {
 				console.log(error);
@@ -116,8 +125,9 @@ class Portfolio extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.shares !== this.state.shares) {
-			this.getStockSymbol();
+			this.getCurrentStockPrice();
 		}
+		// console.log(this.state.currentPrices);
 	}
 
 	render() {
@@ -130,7 +140,7 @@ class Portfolio extends React.Component {
 					</button>
 				</div>
 				<hr className="m-3" />
-				<SharesList shares={this.state.shares} />
+				<SharesList shares={this.state.shares} currentPrices={this.state.currentPrices} />
 				{/* <SharesCard />
 				<SharesCard />
 				<SharesCard /> */}
