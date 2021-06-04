@@ -111,7 +111,7 @@ class Portfolio extends React.Component {
 					</button>
 				</div>
 				<hr className="m-3" />
-				<div className="m-4 d-flex justify-content-around">
+				<div className="ml-auto mr-auto m-5 d-flex justify-content-around account-balance">
 					<div className="d-flex">
 						<h4 className="mr-2">Account Balance:</h4>
 

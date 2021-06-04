@@ -9,7 +9,7 @@ const SharesList = ({ shares, currentPrices }) => {
 		const currentPrice = currentPrices[stock.symbol];
 		return <SharesCard key={stock.stock_id} stock={stock} currentPrice={currentPrice} />;
 	});
-	return <div className="d-flex flex-column">{sharesCards}</div>;
+	return <div className="d-flex flex-column align-items-center">{sharesCards}</div>;
 };
 
 export default SharesList;
