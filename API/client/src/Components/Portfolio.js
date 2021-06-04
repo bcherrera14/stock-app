@@ -13,17 +13,25 @@ class Portfolio extends React.Component {
 			modalShow: false,
 			shares: [],
 			accountBalance: 0,
-			currentPrices: null
+			currentPrices: null,
+			netAssets: 0
 		};
 		this.setModalShow = this.setModalShow.bind(this);
 		this.getCurrentStockPrice = this.getCurrentStockPrice.bind(this);
 		this.getUsersStocks = this.getUsersStocks.bind(this);
 		this.getAccountBalance = this.getAccountBalance.bind(this);
+		this.sumNetAssets = this.sumNetAssets.bind(this);
 	}
 
 	setModalShow(bool) {
 		this.setState({
 			modalShow: bool
+		});
+	}
+
+	sumNetAssets(netAssets) {
+		this.setState({
+			netAssets: netAssets
 		});
 	}
 
@@ -123,15 +131,15 @@ class Portfolio extends React.Component {
 					</div>
 					<div className="d-flex">
 						<h4 className="mr-2">Net Assets: </h4>
-						<h4>
-							{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
-								this.state.accountBalance
-							)}
-						</h4>
+						<h4>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(10)}</h4>
 					</div>
 				</div>
 				{this.state.currentPrices !== null ? (
-					<SharesList shares={this.state.shares} currentPrices={this.state.currentPrices} />
+					<SharesList
+						sumNetAssets={this.sumNetAssets}
+						shares={this.state.shares}
+						currentPrices={this.state.currentPrices}
+					/>
 				) : null}
 				<StockModal
 					modalState={this.state.modalShow}
